@@ -1,6 +1,0 @@
-com\example\greetingservice\service\GreetingService.class
-com\example\greetingservice\controller\GreetingController.class
-com\example\greetingservice\exception\GlobalExceptionHandler.class
-com\example\greetingservice\GreetingServiceApplication.class
-com\example\greetingservice\model\GreetingResponse.class
-com\example\greetingservice\model\Person.class
