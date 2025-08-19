@@ -109,6 +109,10 @@ src/
 │   │       ├── GreetingServiceApplication.java
 │   │       ├── controller/
 │   │       │   └── GreetingController.java
+│   │       ├── exception/
+│   │       │   └── GlobalExceptionHandler.java
+│   │       ├── service/
+│   │       │   └── GreetingService.java
 │   │       └── model/
 │   │           ├── Person.java
 │   │           └── GreetingResponse.java

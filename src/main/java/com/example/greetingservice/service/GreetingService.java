@@ -26,8 +26,18 @@ public class GreetingService {
 
     public GreetingResponse returnGreetings (Person person) {
         
-        String firstName = person.getFirstName() != null ? person.getFirstName() : "";
-        String lastName = person.getLastName() != null ? person.getLastName() : "";
+        String firstName = person.getFirstName();
+        String lastName = person.getLastName();
+
+        //the NullPointerException (which is an unchecked exception / runtime exception) is automatically throw, 
+        //so this code is just to customize the error message. 
+        //The NullPointerException is declared to be handled by GlobalExceptionHandler class,
+        //otherwise this exception would be caught by the try catch in the controller
+        try {
+            lastName = lastName.toUpperCase();
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Last name is null");
+        }
 
         String englishGreeting = String.format("Hello, %s %s! Welcome to our microservice!", 
         firstName, lastName);

@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<String> handleHttpMessageNotReadableException(
+    public ResponseEntity<Object> handleHttpMessageNotReadableException(
         HttpMessageNotReadableException ex,
         HttpServletRequest request) {
 
@@ -32,7 +32,14 @@ public class GlobalExceptionHandler {
             errorMessage = "Invalid request body for the " + requestURI + " endpoint. ";
         }
 
-        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+        // create a custom response body
+        Map<String, String> body = new HashMap<>();
+        body.put("status", HttpStatus.BAD_REQUEST.toString());
+        body.put("message", errorMessage);
+        body.put("timestamp", new java.util.Date().toString());
+
+        // Return a ResponseEntity with the custom body and status code
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -47,5 +54,18 @@ public class GlobalExceptionHandler {
         });
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<Object> handleNullPointerException(NullPointerException ex) {
+        
+        // Create a custom response body
+        Map<String, Object> body = new HashMap<>();
+        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.toString());
+        body.put("message", ex.getMessage()); 
+        body.put("timestamp", new java.util.Date());
+        
+        // Return a ResponseEntity with the custom body and status code
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
