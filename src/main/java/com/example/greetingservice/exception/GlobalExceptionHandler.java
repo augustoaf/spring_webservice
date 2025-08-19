@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+//this class will intercept all exceptions declared here instead of controller handling it
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
