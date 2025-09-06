@@ -20,7 +20,6 @@ buildNumber.properties
 
 # Output files
 output/
-*.txt
 
 # Logs
 *.log

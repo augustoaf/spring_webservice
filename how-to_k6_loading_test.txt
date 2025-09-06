@@ -1,0 +1,12 @@
+#install openapi-generator-cli to generate the script based on your api spec
+npm install -g @openapitools/openapi-generator-cli
+
+#generate yur api spec through your OpenAPI definition (e.g. http://localhost:8080/swagger-ui/index.html#/)
+
+#generate the k6 script having your api spec as input
+openapi-generator-cli generate -i <path-to-your-spec> -g k6 -o <output-directory>
+#e.g.,
+openapi-generator-cli generate -i ./api_spec.txt -g k6 -o ./k6-tests
+
+#run the test with K6
+k6 run <your .js script file>

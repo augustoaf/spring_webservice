@@ -14,6 +14,13 @@
 import http from "k6/http";
 import { group, check, sleep } from "k6";
 
+export const options = {
+  //number of virtual users
+  vus: 10,
+  //duration of the test
+  duration: '30s',
+};
+
 const BASE_URL = "http://localhost:8080";
 // Sleep duration between successive requests.
 // You might want to edit the value of this variable or remove calls to the sleep function on the script.
