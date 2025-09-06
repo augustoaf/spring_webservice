@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
         // create a custom response body
         Map<String, String> body = new HashMap<>();
         body.put("status", HttpStatus.BAD_REQUEST.toString());
-        body.put("message", errorMessage);
+        body.put("Exception intercepted (HttpMessageNotReadableException), message: ", errorMessage);
         body.put("timestamp", new java.util.Date().toString());
 
         // Return a ResponseEntity with the custom body and status code
@@ -63,7 +63,7 @@ public class GlobalExceptionHandler {
         // Create a custom response body
         Map<String, Object> body = new HashMap<>();
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.toString());
-        body.put("message", ex.getMessage()); 
+        body.put("Exception intercepted (NullPointerException), message: ", ex.getMessage()); 
         body.put("timestamp", new java.util.Date());
         
         // Return a ResponseEntity with the custom body and status code

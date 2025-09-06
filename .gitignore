@@ -32,3 +32,8 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp 
+
+# K6 files to ignore
+openapitools.json
+k6-tests/.openapi-generator-ignore
+k6-tests/.openapi-generator
