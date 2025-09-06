@@ -16,31 +16,43 @@ import { group, check, sleep } from "k6";
 
 export const options = {
   //number of virtual users
-  vus: 10,
+  vus: 1000,
   //duration of the test
-  duration: '30s',
+  duration: '10s',
 };
 
 const BASE_URL = "http://localhost:8080";
-// Sleep duration between successive requests.
-// You might want to edit the value of this variable or remove calls to the sleep function on the script.
-const SLEEP_DURATION = 0.1;
-// Global variables should be initialized.
+// Sleep duration between successive requests for each VU, in seconds.
+const SLEEP_DURATION = 0.5;
+
+// Define an array of data, where each element represents a unique request body
+const requestData = [
+    { firstName: "John", lastName: "Doe" },
+    { firstName: "Jane", lastName: "Smith" },
+    { firstName: "Alice", lastName: "Johnson" },
+    { firstName: "Bob", lastName: "Williams" },
+];
 
 export default function() {
     group("/v0/greetingsFullName", () => {
 
         // Request No. 1: greetingsFullNameDraft
         {
+            // Get the current virtual user's ID
+            const vuId = __VU;
+            
+            // Use the VU ID to get a unique data object from the array
+            const dataIndex = (vuId - 1) % requestData.length;
+            const currentData = requestData[dataIndex];
+            
             let url = BASE_URL + `/v0/greetingsFullName`;
-            // TODO: edit the parameters of the request body.
-            let body = {"firstName": "string", "lastName": "string"};
             let params = {
                 headers: {
-                    "Content-Type": "application/json", "Accept": "*/*"
+                    "Content-Type": "application/json",
+                    "Accept": "*/*"
                 }
             };
-            let request = http.post(url, JSON.stringify(body), params);
+            let request = http.post(url, JSON.stringify(currentData), params);
 
             check(request, {
                 "OK": (r) => r.status === 200
@@ -81,5 +93,5 @@ export default function() {
             });
         }
     });
-
+    sleep(SLEEP_DURATION);
 }

@@ -39,7 +39,7 @@ public class GreetingController {
     @PostMapping("/greetingsFullName")
     public GreetingResponse greetingsFullName(@Valid @RequestBody Person person) {
         
-        logger.debug("debug mode: request received");
+        logger.debug("debug mode: request received: " + person.toString());
          
         try {
 
@@ -57,7 +57,7 @@ public class GreetingController {
     @PostMapping("/v0/greetingsFullName")
     public ResponseEntity<Object> greetingsFullNameDraft(@Valid @RequestBody Person person) {
         
-        logger.debug("debug mode: request received v0");
+        logger.debug("debug mode: request received v0: " + person.toString());
          
         try {
 
