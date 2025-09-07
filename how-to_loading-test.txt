@@ -1,0 +1,25 @@
+########### K6 ##############
+
+#install openapi-generator-cli to generate the script based on your api spec
+npm install -g @openapitools/openapi-generator-cli
+
+#generate your api spec through your OpenAPI definition (e.g. http://localhost:8080/swagger-ui/index.html#/)
+
+#generate the k6 script having your api spec as input
+openapi-generator-cli generate -i <path-to-your-spec> -g k6 -o <output-directory>
+#e.g.,
+openapi-generator-cli generate -i ./api_spec.txt -g k6 -o ./k6-tests
+
+#run the test with K6
+k6 run <your .js script file>
+
+
+########### JMETER ##############
+
+#execute gui mode to define test plan
+jmeter.bat
+
+#execute load testing in cli mode (non-gui) in order to use the resources more efficiently 
+jmeter.bat -n -t <path to test plan .jmx file) -l <path to log result in a .jtl file> -e -o <folder to generate the report - must be empty>
+#e.g.,
+jmeter.bat -n -t jmeter-tests/greetings-testplan.jmx -l jmeter-tests/results.jtl -e -o jmeter-tests/report

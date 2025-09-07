@@ -36,3 +36,7 @@ Thumbs.db
 openapitools.json
 k6-tests/.openapi-generator-ignore
 k6-tests/.openapi-generator
+
+# Jmeter to ignore
+jmeter-tests/report
+*.jtl
